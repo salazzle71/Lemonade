@@ -36,7 +36,7 @@ class MainActivity : ComponentActivity() {
 
 @Composable
 fun LemonadeApp() {
-    LemonadeWithButtonAndImage(
+    LemonadeFonction(
         modifier = Modifier
             .fillMaxSize()
             .wrapContentSize(Alignment.Center)
@@ -45,7 +45,7 @@ fun LemonadeApp() {
 
 @Composable
 
-fun LemonadeWithButtonAndImage(modifier: Modifier = Modifier) {
+fun LemonadeFonction(modifier: Modifier = Modifier) {
 
     // État pour l etape commence a 1
 
