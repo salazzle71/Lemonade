@@ -51,7 +51,7 @@ fun LemonadeWithButtonAndImage(modifier: Modifier = Modifier) {
 
     var etape by remember {  mutableStateOf(1) }
 
-    // clics pour presser le citron (aleatoire entre 2 et 4)
+        // clics pour presser le citron (aleatoire entre 2 et 4)
 
     var Click by remember { mutableStateOf(0) }
 
@@ -81,7 +81,7 @@ fun LemonadeWithButtonAndImage(modifier: Modifier = Modifier) {
             ) {
 
                 Text(
-                    text = "Lemonade",
+                    text = stringResource(R.string.name),
                     fontSize = 20.sp,
                     fontWeight = FontWeight.Bold,
                     color = Color.Black
@@ -105,15 +105,18 @@ fun LemonadeWithButtonAndImage(modifier: Modifier = Modifier) {
                                     etape = 2
                                     Click = (2..4).random()
                                 }
+
                                 2 -> {
                                     Click--
                                     if (Click <= 0) {
                                         etape = 3
                                     }
                                 }
+
                                 3 -> {
                                     etape = 4
                                 }
+
                                 4 -> {
                                     etape = 1
                                 }
@@ -142,7 +145,7 @@ fun LemonadeWithButtonAndImage(modifier: Modifier = Modifier) {
                       // Espace de 16sp entre le bouton et le texte
                     Spacer(modifier = Modifier.height(16.dp))
 
-                    // Texte en dessous du bouton (taille 18sp, centre)
+                    // Texte en dessous du bouton
                     Text(
                         text = stringResource(texte),
                         fontSize = 18.sp,
@@ -156,9 +159,11 @@ fun LemonadeWithButtonAndImage(modifier: Modifier = Modifier) {
 }
 
 @Preview(showBackground = true)
+
 @Composable
 fun LemonadePreview() {
     LemonadeTheme {
         LemonadeApp()
     }
 }
+
