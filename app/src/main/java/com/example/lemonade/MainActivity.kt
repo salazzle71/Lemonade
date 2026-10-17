@@ -14,6 +14,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
@@ -43,15 +44,22 @@ fun LemonadeApp() {
 }
 
 @Composable
+
 fun LemonadeWithButtonAndImage(modifier: Modifier = Modifier) {
-    // État pour l'étape actuelle (1 à 4)
-    var currentStep by remember { mutableStateOf(1) }
 
-    // Nombre de clics restants pour presser le citron (aléatoire entre 2 et 4)
-    var remainingClicks by remember { mutableStateOf(0) }
+    // État pour l etape commence a 1
 
-    // Définition du texte et de l'image selon l'étape
-    val (textResource, imageResource) = when (currentStep) {
+    var etape by remember {  mutableStateOf(1) }
+
+    // clics pour presser le citron (aleatoire entre 2 et 4)
+
+    var Click by remember { mutableStateOf(0) }
+
+
+
+        // Definition du text et de l image selon l etape
+
+    val (texte, images) = when (etape) {
         1 -> Pair(R.string.citronnier, R.drawable.lemon_tree)
         2 -> Pair(R.string.citron, R.drawable.lemon_squeeze)
         3 -> Pair(R.string.citronnade, R.drawable.lemon_drink)
@@ -63,7 +71,7 @@ fun LemonadeWithButtonAndImage(modifier: Modifier = Modifier) {
         color = MaterialTheme.colorScheme.background
     ) {
         Column(modifier = Modifier.fillMaxSize()) {
-            // Bande supérieure jaune citron avec "Lemonade" au centre en noir
+              // Bande superieure jaune citron
             Box(
                 modifier = Modifier
                     .fillMaxWidth()
@@ -71,6 +79,7 @@ fun LemonadeWithButtonAndImage(modifier: Modifier = Modifier) {
                     .padding(vertical = 16.dp),
                 contentAlignment = Alignment.Center
             ) {
+
                 Text(
                     text = "Lemonade",
                     fontSize = 20.sp,
@@ -79,39 +88,42 @@ fun LemonadeWithButtonAndImage(modifier: Modifier = Modifier) {
                 )
             }
 
-            // Contenu principal centré
+               // Contenu principal centre
             Box(
                 modifier = modifier.fillMaxSize(),
                 contentAlignment = Alignment.Center
             ) {
+
                 Column(
                     horizontalAlignment = Alignment.CenterHorizontally
                 ) {
-                    // Bouton avec un fond bleu pâle et angles légèrement arrondis
+                      // Bouton cliquable
                     Button(
                         onClick = {
-                            when (currentStep) {
+                            when (etape) {
                                 1 -> {
-                                    currentStep = 2
-                                    remainingClicks = (2..4).random()
+                                    etape = 2
+                                    Click = (2..4).random()
                                 }
                                 2 -> {
-                                    remainingClicks--
-                                    if (remainingClicks <= 0) {
-                                        currentStep = 3
+                                    Click--
+                                    if (Click <= 0) {
+                                        etape = 3
                                     }
                                 }
                                 3 -> {
-                                    currentStep = 4
+                                    etape = 4
                                 }
                                 4 -> {
-                                    currentStep = 1
+                                    etape = 1
                                 }
                             }
-                        },
+                        },//bords aroondis et fond bleu
+
                         shape = RoundedCornerShape(16.dp),
                         colors = ButtonDefaults.buttonColors(
-                            containerColor = Color(0xFFE3F2FD) // Bleu pâle
+                            containerColor = Color(0xFFE3F2FD)
+
                         ),
                         elevation = ButtonDefaults.buttonElevation(
                             defaultElevation = 0.dp,
@@ -119,18 +131,20 @@ fun LemonadeWithButtonAndImage(modifier: Modifier = Modifier) {
                         )
                     ) {
                         Image(
-                            painter = painterResource(imageResource),
-                            contentDescription = textResource,
+                            painter = painterResource(images),
+
+                            // stringResource pour transformer l'ID en String
+                            contentDescription = stringResource(texte),
                             modifier = Modifier.size(150.dp)
                         )
                     }
 
-                    // Espace de 16sp entre le bouton et le texte en dessous
+                      // Espace de 16sp entre le bouton et le texte
                     Spacer(modifier = Modifier.height(16.dp))
 
-                    // Texte en dessous du bouton (taille 18sp, centré)
+                    // Texte en dessous du bouton (taille 18sp, centre)
                     Text(
-                        text = textResource,
+                        text = stringResource(texte),
                         fontSize = 18.sp,
                         color = Color.Black,
                         textAlign = TextAlign.Center
