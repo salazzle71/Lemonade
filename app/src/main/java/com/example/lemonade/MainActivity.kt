@@ -49,11 +49,11 @@ fun LemonadeWithButtonAndImage(modifier: Modifier = Modifier) {
 
     // État pour l etape commence a 1
 
-    var etape by remember {  mutableStateOf(1) }
+    var etape by remember { mutableIntStateOf(1) }
 
         // clics pour presser le citron (aleatoire entre 2 et 4)
 
-    var Click by remember { mutableStateOf(0) }
+    var click by remember { mutableIntStateOf(0) }
 
 
 
@@ -103,12 +103,12 @@ fun LemonadeWithButtonAndImage(modifier: Modifier = Modifier) {
                             when (etape) {
                                 1 -> {
                                     etape = 2
-                                    Click = (2..4).random()
+                                    click = (2..4).random()
                                 }
 
                                 2 -> {
-                                    Click--
-                                    if (Click <= 0) {
+                                    click--
+                                    if (click <= 0) {
                                         etape = 3
                                     }
                                 }
